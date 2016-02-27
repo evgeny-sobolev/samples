@@ -20,15 +20,15 @@ public:
 	// Считывает значения из файла и разносит по корзинам
 	//
 	// @param filePath	Путь к файлу
-	void FillBuskets(const std::string& filePath);
+	void FillBaskets(const std::string& filePath);
 
 	// Сортирует корзины в возрастающем порядке порядке
-	void SortBuskets();
+	void SortBaskets();
 
 	// Объединяет корзины в один файл
 	//
 	// @param filePath	Результативный файл
-	void CombineBuskets(const std::string& filePath);
+	void CombineBaskets(const std::string& filePath);
 
 // Функции
 private:
@@ -43,7 +43,7 @@ private:
 	// @param minValue		Минимальное значение
 	// @param maxValue		Максимальное значение
 	// @param memorySize	Размер памяти машины
-	void CreateBuskets(int minValue, int maxValue, unsigned int memorySize);
+	void CreateBaskets(int minValue, int maxValue, unsigned int memorySize);
 	
 // Дата
 private:

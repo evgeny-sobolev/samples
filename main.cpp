@@ -51,7 +51,7 @@ int main()
 	const unsigned int MACHINE_MEMORY_SIZE = 0x2800;
 	
 	// Вызовите функцию для генерации тестового файла
-	GenerateSourceFile("x:\\input.dat", 0x100000 / sizeof(int));
+	//GenerateSourceFile("x:\\input.dat", 0x100000 / sizeof(int));
 
 	// Шаг 1: найдём min и max значения в файле
 	int minValue(0);
@@ -68,13 +68,13 @@ int main()
 	BasketManager bm(minValue, maxValue, MACHINE_MEMORY_SIZE);
 
 	//  Шаг 3: считываем значения из файла кусками и забрасываем в корзины
-	bm.FillBuskets("x:\\input.dat");
+	bm.FillBaskets("x:\\input.dat");
 
 	//  Шаг 4: сорт корзин
-	bm.SortBuskets();
+	bm.SortBaskets();
 
 	// Шаг финальный: объединяем все корзины в один файл
-	bm.CombineBuskets("x:\\output.dat");
+	bm.CombineBaskets("x:\\output.dat");
 
 	std::cout << "output.dat создан успешно" << std::endl;
 

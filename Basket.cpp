@@ -3,19 +3,19 @@
 #include <vector>
 
 // ---
-Basket::Basket(int minValue, int maxValue, const std::string& filePath, unsigned int allowedBusketSize, unsigned int memorySize)
+Basket::Basket(int minValue, int maxValue, const std::string& filePath, unsigned int allowedBasketSize, unsigned int memorySize)
 	: mMinValue(minValue)
 	, mMaxValue(maxValue)
 	, mFilePath(filePath)
-	, mBusketMemory(allowedBusketSize)
+	, mBasketMemory(allowedBasketSize)
 	, mMachineMemory(memorySize)
 {
-	if (0 != fopen_s(&mFile, filePath.c_str(), "wb+") || allowedBusketSize < sizeof(int))
+	if (0 != fopen_s(&mFile, filePath.c_str(), "wb+") || allowedBasketSize < sizeof(int))
 	{
 		throw std::exception("Не удалось создать файл-корзину"); 
 	}
 
-	mCache.maxSize = allowedBusketSize / sizeof(int);
+	mCache.maxSize = allowedBasketSize / sizeof(int);
 
 	mCache.ptr = new int[mCache.maxSize];
 }

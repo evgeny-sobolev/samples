@@ -60,7 +60,7 @@ private:
 	unsigned int mMachineMemory;
 
 	// Размер кэша корзины
-	unsigned int mBusketMemory;
+	unsigned int mBasketMemory;
 
 	// Кэш хранения чисел
 	struct Cache

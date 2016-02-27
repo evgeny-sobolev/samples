@@ -7,7 +7,7 @@
 BasketManager::BasketManager(int minValue, int maxValue, unsigned int memorySize)
 	: mMemorySize(memorySize)
 {
-	CreateBuskets(minValue, maxValue, memorySize);
+	CreateBaskets(minValue, maxValue, memorySize);
 }
 
 // ---
@@ -21,7 +21,7 @@ BasketManager::~BasketManager()
 }
 
 // ---
-void BasketManager::CreateBuskets(int minValue, int maxValue, unsigned int memorySize)
+void BasketManager::CreateBaskets(int minValue, int maxValue, unsigned int memorySize)
 {
 	// Используем 50% доступной памяти, чтобы избежать тот случай где размер файла-корзины 
 	// превышает размер доступной памяти и невозможно загрузить файл в память целиком.
@@ -39,17 +39,17 @@ void BasketManager::CreateBuskets(int minValue, int maxValue, unsigned int memor
 	const int elementCountInMachineMemory = allowedMemory / sizeof(int);
 
 	// Кол-во необходимых корзин
-	const int busketCount = elementsRange / elementCountInMachineMemory + 1;
+	const int basketCount = elementsRange / elementCountInMachineMemory + 1;
 
 	// Если количество корзин меньше 2х, то файл полностью может быть загружен в память. Пропускаю этот случай...
 
 	// Вычисляем размер вспомогательного кэша в корзинах
-	const int allowMemoryPerBusket = memorySize / busketCount;
+	const int allowMemoryPerBasket = memorySize / basketCount;
 
 	char bufferName[10];
 	
 	// Создаём корзины
-	for (int index = 0; index < busketCount; ++index)
+	for (int index = 0; index < basketCount; ++index)
 	{
 		int min = minValue + index * elementCountInMachineMemory;
 		
@@ -57,7 +57,7 @@ void BasketManager::CreateBuskets(int minValue, int maxValue, unsigned int memor
 		
 		char *fileName = _itoa(index, bufferName, 10);
 
-		Basket* basket = new Basket(min, max, std::string(fileName).c_str(), allowMemoryPerBusket, allowedMemory);
+		Basket* basket = new Basket(min, max, std::string(fileName).c_str(), allowMemoryPerBasket, allowedMemory);
 		
 		mBaskets.push_back(basket);
 	}
@@ -81,7 +81,7 @@ void BasketManager::AddValue(int value)
 }
 
 // ---
-void BasketManager::FillBuskets(const std::string& filePath)
+void BasketManager::FillBaskets(const std::string& filePath)
 {
 	const int bufferSize = mMemorySize / sizeof(int);
 	
@@ -115,7 +115,7 @@ void BasketManager::FillBuskets(const std::string& filePath)
 }
 
 // ---
-void BasketManager::SortBuskets()
+void BasketManager::SortBaskets()
 {
 	for (int index = 0; index < (int)mBaskets.size(); ++index)
 	{
@@ -124,7 +124,7 @@ void BasketManager::SortBuskets()
 }
 
 // ---
-void BasketManager::CombineBuskets(const std::string& filePath)
+void BasketManager::CombineBaskets(const std::string& filePath)
 {
 	FILE* file = ::fopen(filePath.c_str(), "wb");
 
